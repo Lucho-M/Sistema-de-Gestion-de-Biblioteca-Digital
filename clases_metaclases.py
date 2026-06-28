@@ -88,9 +88,10 @@ class Libro(metaclass=MetaEntidad):
 
 
 class Prestamo(metaclass=MetaEntidad):
-    def __init__(self, libro, usuario):
+    def __init__(self, libro, usuario, dias_plazo):
         self.libro = libro
         self.usuario = usuario
+        self.dias_plazo = dias_plazo
         self.fecha_prestamo = date.today()
         self.fecha_devolucion = None
         self.activo = True
