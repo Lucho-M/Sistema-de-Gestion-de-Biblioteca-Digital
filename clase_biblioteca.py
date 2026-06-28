@@ -42,7 +42,7 @@ class Biblioteca:
         self.prestamos = []   # composicion: los crea y posee la biblioteca
         self.bitacora = []
         self._inicializada = True
-        SELF.observadores = []
+        self.observadores = []
 
     # ---------- helpers privados ----------
     def _buscar_libro(self, isbn):
