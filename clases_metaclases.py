@@ -55,6 +55,17 @@ class Usuario(Persona):
     def obtener_info(self):
         return f"Usuario #{self._id}: {self._nombre} {self._apellido} (DNI {self._dni})"
 
+    def update(self, prestamo):
+        mensaje = (
+            f"Estimado/a {self._nombre},\n\n"
+            f"Nos comunicamos para informarle que el plazo de devolución "
+            f"del libro '{prestamo.libro.titulo}' ha expirado.\n"
+            f"Por favor acérquese a la biblioteca para regularizar su situación.\n\n"
+            f"Saludos cordiales,\n"
+            f"La Biblioteca."
+        )
+        print(f"[EMAIL a {self._correo}] Vencimiento de plazo\n{mensaje}\n")
+
 
 class Administrador(Persona):
     def __init__(self, nombre, apellido, dni, correo, nivel_acceso=1):
@@ -73,6 +84,14 @@ class Administrador(Persona):
 
     def gestionar_prestamo(self, biblioteca, isbn, dni):
         return biblioteca.registrar_prestamo(isbn, dni)
+
+    def update(self, prestamo):
+        mensaje = (
+            f"El préstamo del libro '{prestamo.libro.titulo}'\n"
+            f"correspondiente al usuario {prestamo.usuario._nombre}\n"
+            f"ha expirado."
+        )
+        print(f"[EMAIL a {self._correo}] Vencimiento de plazo\n{mensaje}\n")
 
 
 class Libro(metaclass=MetaEntidad):
