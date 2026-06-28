@@ -1,5 +1,6 @@
 import functools
-from datetime import datetime
+from datetime import datetime , date
+from abc import ABC
 
 from clases_metaclases import Prestamo
 
@@ -127,3 +128,26 @@ class Biblioteca:
 
     def prestamos_activos(self):
         return [p for p in self.prestamos if p.esta_activo()]
+
+    # ---------- patron de diseño Observer ----------
+    # Simulamos el envio de correo
+    # en caso reales se importa smtplib
+
+
+    def agregar_observador(self, obs: Observer):
+        self.observadores.append(obs)
+
+    def quitar_observador(self, obs: Observer):
+        self.observadores.remove(obs)
+
+    def notificar(self, prestamo):
+        for obs in self.observadores:
+            obs.update(prestamo)
+
+    def plazo_entrega(self, prestamo):
+        hoy = date.today()
+        dias_restantes = (hoy - prestamo.fecha_prestamo).days
+        if dias_restantes >= prestamo.dias_plazo:
+            self.notificar(prestamo)
+        else:
+         return f"El usuario está dentro del plazo permitido"
