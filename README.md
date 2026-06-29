@@ -1,11 +1,11 @@
 # Sistema de Gestión de Biblioteca Digital
 
-Trabajo Práctico Final – Unidad I – Programación Avanzada (189)
-Universidad Nacional Guillermo Brown – Licenciatura en Ciencia de Datos
+Trabajo Práctico Final – Unidad I – Programación Avanzada
+Universidad Nacional Guillermo Brown
 
 ## Descripción
 
-Aplicación en Python que permite administrar una biblioteca: alta, baja,
+Aplicación en Python que permite administrar una biblioteca: alta,baja,
 modificación y listado de libros y usuarios, y registro de préstamos y
 devoluciones. Un libro no puede prestarse si ya tiene un préstamo activo.
 Todo el sistema está modelado con Programación Orientada a Objetos siguiendo
