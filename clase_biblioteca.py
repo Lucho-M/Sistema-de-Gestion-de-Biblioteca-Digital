@@ -2,7 +2,7 @@ import functools
 from datetime import datetime , date
 from abc import ABC
 
-from clases_metaclases import Prestamo
+from clases_metaclases import Prestamo, Observer
 
 
 def registrar_operacion(funcion):
@@ -106,14 +106,14 @@ class Biblioteca:
 
     # ---------- gestion de prestamos ----------
     @registrar_operacion
-    def registrar_prestamo(self, isbn, dni):
+    def registrar_prestamo(self, isbn, dni, dias_plazo=7):
         libro = self._buscar_libro(isbn)
         usuario = self._buscar_usuario(dni)
         if libro is None or usuario is None:
             raise ValueError("Libro o usuario inexistente")
         if self._tiene_prestamo_activo(libro):
             raise ValueError(f"El libro '{libro.titulo}' ya tiene un prestamo activo")
-        prestamo = Prestamo(libro, usuario)  # composicion: lo crea la biblioteca
+        prestamo = Prestamo(libro, usuario, dias_plazo)  # composicion: lo crea la biblioteca
         self.prestamos.append(prestamo)
         usuario.historial_de_prestamo.append(prestamo)
         return prestamo
