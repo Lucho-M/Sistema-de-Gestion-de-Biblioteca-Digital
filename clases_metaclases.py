@@ -1,4 +1,4 @@
-from abc import ABCMeta, abstractmethod
+from abc import ABC, ABCMeta, abstractmethod
 from datetime import date
 
 
@@ -35,10 +35,19 @@ class Persona(metaclass=MetaEntidad):
 
     @abstractmethod
     def obtener_info(self):
-        ... 
+        ...
 
 
-class Usuario(Persona):
+class Observer(ABC):
+    """Interfaz del patron Observer: quien se quiera enterar de un vencimiento
+    de prestamo tiene que implementar update()."""
+
+    @abstractmethod
+    def update(self, prestamo):
+        ...
+
+
+class Usuario(Persona, Observer):
     _ultimo_id = 0
 
     def __init__(self, nombre, apellido, dni, correo):
@@ -67,7 +76,7 @@ class Usuario(Persona):
         print(f"[EMAIL a {self._correo}] Vencimiento de plazo\n{mensaje}\n")
 
 
-class Administrador(Persona):
+class Administrador(Persona, Observer):
     def __init__(self, nombre, apellido, dni, correo, nivel_acceso=1):
         super().__init__(nombre, apellido, dni, correo)
         self._nivel_acceso = nivel_acceso
