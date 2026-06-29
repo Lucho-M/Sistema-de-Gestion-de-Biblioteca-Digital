@@ -1,5 +1,7 @@
+from datetime import timedelta
+
 from clases_metaclases import Usuario, Administrador, Libro, MetaEntidad
-from clase_biblioteca import Biblioteca 
+from clase_biblioteca import Biblioteca
 
 def mostrar_info(elementos):
     """Polimorfismo: recorre objetos distintos y todos responden obtener_info()."""
@@ -65,6 +67,13 @@ def main():
     print("\nBitacora de operaciones (decorador):")
     for linea in biblio.bitacora:
         print(" ", linea)
+
+    # Patron Observer: Luis se entera si se vencio el plazo de su prestamo
+    print("\n--- Patron Observer (aviso de vencimiento) ---")
+    biblio.agregar_observador(luis)
+    prestamo_luis = biblio.prestamos_activos()[0]
+    prestamo_luis.fecha_prestamo -= timedelta(days=10)  # simulamos que se vencio
+    biblio.plazo_entrega(prestamo_luis)
 
 
 if __name__ == "__main__":
